@@ -1,7 +1,7 @@
 {
     "name": "hello-world",
     "author": "Dan Ross",
-    "private": "true",
+    "private": true,
     "dependencies": {
         "express": "^4.17.1"
     }
