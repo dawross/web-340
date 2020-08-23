@@ -1,5 +1,5 @@
 {
-    "name": "morgan-loggin",
+    "name": "morgan-logging",
     "author": "Dan Ross",
     "private": true,
     "dependencies": {
