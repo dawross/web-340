@@ -7,13 +7,18 @@
 
 ;===========================================
 */
+//Imports the ross-header.js file from the root directory
+const header = require("../../ross-header.js");
 
+// output header
+console.log(header.display("Dan", "Ross", "Exercise 3.2"));
+console.log("");
 var express = require("express");
 var http = require("http");
 var app = express();
-app.use(function(request, response){
-    console.log("In comes a request to: " + request.url);
-    response.end("Hello World");
+app.use(function (request, response) {
+  console.log("In comes a request to: " + request.url);
+  response.end("Hello World");
 });
 
 http.createServer(app).listen(8080);

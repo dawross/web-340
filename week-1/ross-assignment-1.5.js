@@ -6,6 +6,12 @@
 ; Description: Node.js server
 ;===========================================
 */
+//Imports the ross-header.js file from the root directory
+const header = require("../../ross-header.js");
+
+// output header
+console.log(header.display("Dan", "Ross", "Exercise 3.2"));
+console.log("");
 var http = require("http");
 function processRequest(req, res) {
   var body = "Hello Universe";
