@@ -10,7 +10,7 @@
 const header = require("../../ross-header.js");
 
 // output header
-console.log(header.display("Dan", "Ross", "Exercise 3.2"));
+console.log(header.display("Dan", "Ross", "Exercise 1.3"));
 console.log("");
 var url = require("url");
 var parsedURL = url.parse("https://www.bellevue.edu/?name=ross");

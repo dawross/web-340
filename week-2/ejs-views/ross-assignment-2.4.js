@@ -11,7 +11,7 @@
 const header = require("../../ross-header.js");
 
 // output header
-console.log(header.display("Dan", "Ross", "Exercise 3.2"));
+console.log(header.display("Dan", "Ross", "Assignment 2.4"));
 console.log("");
 var http = require("http");
 var express = require("express");

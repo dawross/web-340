@@ -10,7 +10,7 @@
 const header = require("../../ross-header.js");
 
 // output header
-console.log(header.display("Dan", "Ross", "Exercise 3.2"));
+console.log(header.display("Dan", "Ross", "Assignment 1.5"));
 console.log("");
 var http = require("http");
 function processRequest(req, res) {
