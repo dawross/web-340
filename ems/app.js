@@ -59,10 +59,10 @@ app.use(
 );
 app.use(cookieParser());
 app.use(csrfProtection);
-app.use(function (request, response, next) {
-  var token = request.csrfToken();
-  response.cookie("XSRF-TOKEN", token);
-  response.locals.csrfToken = token;
+app.use(function (req, res, next) {
+  var token = req.csrfToken();
+  res.cookie("XSRF-TOKEN", token);
+  res.locals.csrfToken = token;
   next();
 });
 
@@ -79,15 +79,41 @@ app.get("/new", function (req, res) {
   });
 });
 
-app.post("/process", function (request, response) {
-  console.log(request.body.txtName);
-  response.redirect("/");
+app.get("/list", function (req, res) {
+  Employee.find({}, function (error, employees) {
+    if (error) throw error;
+
+    res.render("list", {
+      title: "Employee List",
+      employees: employees,
+    });
+  });
 });
 
-//model
-var employee = new Employee({
-  firstName: "Dan",
-  lastName: "Ross",
+
+app.post("/process", function (req, res) {
+  // console.log(req.body.first);
+  if (!req.body.first || !req.body.last) {
+    res.status(400).send("Entries must have a name");
+    return;
+  }
+  //get the request forms data
+  var firstName = req.body.first;
+  var lastName = req.body.last;
+  console.log(firstName + lastName);
+
+  //model
+  var employee = new Employee({
+    firstName: firstName,
+    lastName: lastName,
+  });
+
+  //save
+  employee.save(function (error) {
+    if (error) throw error;
+    console.log(firstName + " " + lastName + " saved successfully");
+  });
+  res.redirect("/");
 });
 
 // create/start Node server

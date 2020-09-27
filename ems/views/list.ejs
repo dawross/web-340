@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include ("header") %>
+  <body>
+    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+      <%- include ("navbar") %> <% if (employees.length) { %>
+      <h2>-- Employee LIsting --</h2>
+      <a href="/new"><i class="fa fa-user-plus"></i> Add new</a>
+      <table class="table table-hover table-dark table-striped">
+        <thead class="thead-dark">
+          <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% employees.forEach(function(entry) { %>
+          <tr>
+            <td><%= entry.firstName %></td>
+            <td><%= entry.lastName %></td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+      <% } else { %> 
+        No entries! <a href="/new">Add one!</a>
+      <% } %>     
+      <%- include ("footer") %>
+    </div>
+  </body>
+</html>
