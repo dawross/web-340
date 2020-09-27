@@ -13,14 +13,19 @@ const header = require("../ross-header.js");
 // output header
 console.log(header.display("Dan", "Ross", "Assignment 5.4"));
 console.log("");
-
+//require statements
 var express = require("express");
 var http = require("http");
 var path = require("path");
 var logger = require("morgan");
-var app = express();
+var helmet = require("helmet");
 var mongoose = require("mongoose");
 var Employee = require('./models/employee');
+
+//initialize express
+var app = express();
+
+
 // mLab connection
 var mongoDB = "mongodb+srv://admin:6553rush@buwebdev-cluster-1.cnaxx.mongodb.net/test";
 mongoose.connect(mongoDB, {
@@ -34,12 +39,15 @@ db.once("open", function(){
     console.log("Application connected to mLab MongoDB instance");
 });
 
-
+//set statements
 app.set("views", path.resolve(__dirname, "views"));
-app.use(express.static(__dirname + '/public'));
-app.set("view engine", "ejs")
-app.use(logger("short"));
+app.set("view engine", "ejs");
 
+//use statements
+app.use(express.static(__dirname + '/public'));
+app.use(logger("short"));
+app.use(helmet.xssFilter());
+// http calls
 app.get("/", function(req, res){
     res.render("index", {
         title: "Home Page"
@@ -53,6 +61,7 @@ var employee  = new Employee({
 })
 
 
+// create/start Node server
 http.createServer(app).listen(8080, function(){
     console.log("Application started on port 8080!")
 });
