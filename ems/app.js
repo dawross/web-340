@@ -1,8 +1,8 @@
 /*
 ============================================
-; Title: Assignment 8.4
+; Title: EMS
 ; Author: Dan Ross
-; Date: 27 September 2020
+; Date: 3 October 2020
 ; Description: EMS
 ;===========================================
 */
@@ -11,7 +11,7 @@
 const header = require("../ross-header.js");
 
 // output header
-console.log(header.display("Dan", "Ross", "Assignment 5.4"));
+console.log(header.display("Dan", "Ross", "EMS"));
 console.log("");
 //require statements
 var express = require("express");
@@ -90,6 +90,23 @@ app.get("/list", function (req, res) {
   });
 });
 
+app.get("/view/:queryName", function(req, res) {
+  var queryName = req.params.queryName;
+  Employee.find({'firstName':queryName}, function(error, employees) {
+    if (error) throw error;
+    console.log(employees);
+    if (employees.length > 0) {
+      res.render("view", {
+        title: "Employee Record",
+        employees:employees 
+      });
+    }
+    else {
+      res.redirect("/list")
+    }
+  });
+
+});
 
 app.post("/process", function (req, res) {
   // console.log(req.body.first);
