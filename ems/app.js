@@ -8,11 +8,11 @@
 */
 
 //Imports the ross-header.js file from the root directory
-const header = require("../ross-header.js");
+// const header = require("../ross-header.js");
 
 // output header
-console.log(header.display("Dan", "Ross", "EMS"));
-console.log("");
+// console.log(header.display("Dan", "Ross", "EMS"));
+// console.log("");
 //require statements
 var express = require("express");
 var http = require("http");
@@ -90,22 +90,20 @@ app.get("/list", function (req, res) {
   });
 });
 
-app.get("/view/:queryName", function(req, res) {
+app.get("/view/:queryName", function (req, res) {
   var queryName = req.params.queryName;
-  Employee.find({'firstName':queryName}, function(error, employees) {
+  Employee.find({ firstName: queryName }, function (error, employees) {
     if (error) throw error;
     console.log(employees);
     if (employees.length > 0) {
       res.render("view", {
         title: "Employee Record",
-        employees:employees 
+        employees: employees,
       });
-    }
-    else {
-      res.redirect("/list")
+    } else {
+      res.redirect("/list");
     }
   });
-
 });
 
 app.post("/process", function (req, res) {
@@ -134,6 +132,7 @@ app.post("/process", function (req, res) {
 });
 
 // create/start Node server
-http.createServer(app).listen(8080, function () {
-  console.log("Application started on port 8080!");
+app.set("port", process.env.PORT || 8080);
+http.createServer(app).listen(app.get("port"), function () {
+  console.log("Application started on port " + app.get("port"));
 });
